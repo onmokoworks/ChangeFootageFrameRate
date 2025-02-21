@@ -42,7 +42,7 @@
             return;
         }
 
-        function setFrameRate(item, frameRate) {
+        function setFrameRate(item) {
             // コンポジションの場合
             if (item instanceof CompItem) {
                 // 直接 frameRate を変更
@@ -63,7 +63,7 @@
             else if (chkRecursive.value && item instanceof FolderItem) {
                 var updatedCount = 0;
                 for (var i = 1; i <= item.numItems; i++) {
-                    updatedCount += setFrameRate(item.item(i), frameRate);
+                    updatedCount += setFrameRate(item.item(i));
                 }
                 return updatedCount;
             }
@@ -75,7 +75,7 @@
         for (var i = 0; i < selItems.length; i++) {
             var item = selItems[i];
             try {
-                updatedCount += setFrameRate(item, newFrameRate);
+                updatedCount += setFrameRate(item);
             } catch (e) {
                 alert("アイテム「" + item.name + "」のフレームレート変更に失敗しました:\n" + e.toString());
             }
